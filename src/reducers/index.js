@@ -6,7 +6,8 @@ import localUser from './localUser';
 const reducers = combineReducers({
   messages,
   users,
-  localUser
+  localUser,
+  actionCount : (state)=>state ? [state[0]+1] : [1]
 
 });
 

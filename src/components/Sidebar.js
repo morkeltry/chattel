@@ -26,9 +26,12 @@ class Sidebar extends Component {
     return <aside id="sidebar" className="sidebar">
       <div>
         <ul>
-          {usersList.map(user => (
-            <li key={user.id}>{user.name}</li>
-          ))}
+          { Array.isArray (usersList) ?             // Ugliness for async testing - remove if poss!
+              usersList.map(user => (
+                <li key={user.id}>{user.name}</li>
+              ))
+              : null
+          }
         </ul>
       </div>
       <div>

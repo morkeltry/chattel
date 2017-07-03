@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import Chance from 'chance';
 import registerServiceWorker from './registerServiceWorker';
@@ -26,9 +26,16 @@ const localUser = {username};
 
 /// mutate localUser here ?  //
 
+
+//redux-dev-tools
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// const enhancers = compose (
+//   window.devToolsExtension ? window.devToolsExtension() : store => store ;
+// )
+
 const store = createStore (
   reducers,
-  applyMiddleware (sagaMiddleware)
+  composeEnhancers (applyMiddleware (sagaMiddleware))   //ideally add r-devtools-xn-compose in a more legible way!
 );
 
 const socket = setupSocket (store.dispatch, localUser, url);

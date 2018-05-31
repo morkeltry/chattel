@@ -1,7 +1,7 @@
-import {ADD_MESSAGE, MESSAGE_RECEIVED, ADD_USER, USERS_LIST}  from './ActionTypes'
+import {ADD_MESSAGE, MESSAGE_RECEIVED, ADD_USER, USERS_LIST}  from './ActionTypes';
 
-let messageId = 0
-let userId = 0
+let messageId = 0;
+let userId = 0;
 
 const addMessage = (message, author) => ({
   type: ADD_MESSAGE,
@@ -28,4 +28,4 @@ const populateUsersList = users => ({
   users
 });
 
-export default {addMessage, addUser, messageReceived, populateUsersList}
+export {addMessage, addUser, messageReceived, populateUsersList}

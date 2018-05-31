@@ -1,10 +1,10 @@
-import React, { Component } from "react"
+import React, { Component } from 'react';
 
-import Sidebar from "./components/Sidebar"
-import MessagesList from "./components/MessagesList"
-import AddMessage from "./components/AddMessage"
+import Sidebar from './components/Sidebar';
+import MessagesList from './components/MessagesList';
+import AddMessage from './components/AddMessage';
 
-import "./App.css"
+import './App.css'
 
 class App extends Component {
   render() {

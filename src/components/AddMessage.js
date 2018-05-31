@@ -1,10 +1,11 @@
 
-import React, { Component } from "react"
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class AddMessage extends Component {
   render () {
     return <section
-     id="messages-list">Messages list</section>
+     id="new-message">Messages list</section>
   };
 
 }

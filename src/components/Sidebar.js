@@ -14,7 +14,7 @@ class Sidebar extends Component {
   };
 
   render () {
-    const usersList = this.props.users || [];
+    const usersList = this.props.users;
     return <aside id="sidebar" className="sidebar">
       <ul>
         {usersList.map(user => (

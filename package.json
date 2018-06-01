@@ -7,12 +7,22 @@
     "react-dom": "^16.4.0",
     "react-redux": "^5.0.7",
     "react-scripts": "1.1.4",
-    "redux": "^4.0.0"
+    "redux": "^4.0.0",
+    "ws": "^5.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "set-port": "HTTPS_PROXY=${HTTPS_PROXY:-8989}",
+    "react": "react-scripts start",
+    "devstart-react": "react-scripts start",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn react\"",
+    "server": "nodemon ./src/server/listen.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5",
+    "concurrently": "^3.5.0"
+  },
+  "proxy": "http://localhost:8989"
 }

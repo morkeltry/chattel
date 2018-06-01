@@ -16,7 +16,7 @@ class MessagesList extends Component {
   };
 
   render () {
-    const messagesList = this.props.messages || [];
+    const messagesList = this.props.messages;
     return <section id="messages-list">
       <ul>
       {messagesList.map (message => (

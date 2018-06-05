@@ -19,7 +19,8 @@ const addUser = name => ({
 const initiateUser = name => ({
   type: INITIATE_USER,
   id: userId++,
-  name
+  name,
+  otherProperties : ''
 });
 
 const messageReceived = (message, author) => ({

@@ -14,9 +14,11 @@ const broadcast = (data, ws) => {
 
 console.log('Listening on ',PORT);
 wss.on('connection', (ws) => {
+  console.log('Got connection.');
   let index
   ws.on('message', (message) => {
     const data = JSON.parse(message)
+    console.log('received: ',data.type);
     switch (data.type) {
       case 'ADD_USER': {
         index = users.length
@@ -44,7 +46,8 @@ wss.on('connection', (ws) => {
   })
 
   ws.on('close', () => {
-    users.splice(index, 1)
+    let leftChannel = users.splice(index, 1)
+      console.log('Connection closed. Bye bye ',JSON.stringify(leftChannel));
     broadcast({
       type: 'USERS_LIST',
       users

@@ -2,9 +2,9 @@ import { combineReducers } from "redux"
 import messages from "./messages"
 import users from "./users"
 
-const chat = combineReducers({
+const reducers = combineReducers({
   messages,
   users
 });
 
-export default chat
+export default reducers

@@ -1,4 +1,4 @@
-import {ADD_MESSAGE, MESSAGE_RECEIVED, ADD_USER, USERS_LIST}  from './ActionTypes';
+import {ADD_MESSAGE, MESSAGE_RECEIVED, ADD_USER, INITIATE_USER, USERS_LIST}  from './ActionTypes';
 
 let messageId = 0;
 let userId = 0;
@@ -16,6 +16,12 @@ const addUser = name => ({
   name
 });
 
+const initiateUser = name => ({
+  type: INITIATE_USER,
+  id: userId++,
+  name
+});
+
 const messageReceived = (message, author) => ({
   type: MESSAGE_RECEIVED,
   id: messageId++,
@@ -28,4 +34,4 @@ const populateUsersList = users => ({
   users
 });
 
-export {addMessage, addUser, messageReceived, populateUsersList}
+export {addMessage, addUser, initiateUser, messageReceived, populateUsersList}

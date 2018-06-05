@@ -9,11 +9,16 @@ import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 import App from './App';
 import reducers from './reducers';
-// import { addUser } from './actions';
+import { addUser } from './actions';
 import setupSocket from './sockets';
 import handleNewMessage from './sagas';
 
-const url = 'ws://localhost:8989';
+
+const protocol = 'ws:';
+const serverIp = 'localhost';
+const port = '8989';
+const url = `${protocol}//${serverIp}:${port}`;
+// const url = 'ws://localhost:8989';
 
 const sagaMiddleware = createSagaMiddleware();
 const username = new Chance().first();
@@ -25,7 +30,7 @@ const store = createStore (
 const socket = setupSocket (store.dispatch, username, url);
 sagaMiddleware.run (handleNewMessage, { socket, username });
 
-// store.dispatch(addUser('You'));
+store.dispatch (addUser('You'));
 
 ReactDOM.render(
     <Provider store={store}>

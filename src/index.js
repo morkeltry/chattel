@@ -24,7 +24,7 @@ const sagaMiddleware = createSagaMiddleware();
 const username = new Chance().first();
 const localUser = {username};
 
-/// 
+/// mutate localUser here ?  //
 
 const store = createStore (
   reducers,

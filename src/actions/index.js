@@ -1,4 +1,4 @@
-import {ADD_MESSAGE, MESSAGE_RECEIVED, ADD_USER, INITIATE_USER, USERS_LIST}  from './ActionTypes';
+import {ADD_MESSAGE, MESSAGE_RECEIVED, ADD_USER, INITIATE_USER, CREATE_USER_FROM_KEYS, USERS_LIST}  from './ActionTypes';
 
 let messageId = 0;
 let userId = 0;

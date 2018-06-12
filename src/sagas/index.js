@@ -1,5 +1,5 @@
-import { takeEvery } from 'redux-saga/effects'
-import { ADD_MESSAGE, INITIATE_USER } from '../actions/ActionTypes'
+import { takeEvery, put } from 'redux-saga/effects'
+import { ADD_MESSAGE, INITIATE_USER, CREATE_USER_FROM_KEYS} from '../actions/ActionTypes'
 
 const existsLocal = false;
 const retrieveLocal = ()=> {};
@@ -11,21 +11,45 @@ const handleNewMessage = function* handleNewMessage (params) {
   })
 };
 
+const genKeys = seed => {
+  let keys= {
+    public : 'supersecret'
+  }
+  if (seed) {
+    keys.public = seed;
+    // do reseed
+  }
+  return new Promise ( (resolve, reject) => {
+    setTimeout ( ()=> {
+      keys.private = keys.public+'...sssh!';
+      resolve (keys);
+    }, 500);
+  })
+}
+
 const initiateUser = function* initiateUser (params) {
   let keys;
-  
-  yield takeEvery (INITIATE_USER, (action) => {
-  if (existsLocal) retrieveLocal()
-    else {
-    /// Generate keys
 
-    };
+  yield takeEvery (INITIATE_USER, function* (action) {
+    console.log('>>>>>>');
+    console.log('Generator params: ',params);
+    console.log('action: ',action);
+    console.log('<<<<<<');
+    if (existsLocal) retrieveLocal()
+      else {
+        keys = genKeys(action.seed);
+      };
+    yield put ({ type: 'CREATE_USER_FROM_KEYS', keys, params});
+
   });
-
-  dispatch({ type: 'CREATE_USER_FROM_KEYS', keys });
-
-
-  // yield 'you sure you want to scrap old user?'
 };
 
-export default handleNewMessage
+
+
+// // how to pass params into rootSaga using sagaMiddleware.run ?
+// const rootSaga = function* rootSaga () {
+//   yield [handleNewMessage, initiateUser];
+// };
+
+
+export { handleNewMessage, initiateUser }

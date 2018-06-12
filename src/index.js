@@ -11,7 +11,7 @@ import App from './App';
 import reducers from './reducers';
 // import { addUser } from './actions';
 import setupSocket from './sockets';
-import handleNewMessage from './sagas';
+import { handleNewMessage, initiateUser } from './sagas';
 
 
 const protocol = 'ws:';
@@ -33,6 +33,7 @@ const store = createStore (
 
 const socket = setupSocket (store.dispatch, localUser, url);
 sagaMiddleware.run (handleNewMessage, { socket, username });
+sagaMiddleware.run (initiateUser);
 
 // store.dispatch (addUser('You'));
 

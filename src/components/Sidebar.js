@@ -1,6 +1,14 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { InitialiseButton } from '../containers/InitialiseButton';
+import { KeyOptions } from '../containers/KeyOptions';
+// import Button from './Button';
+// import Button from './Button';
+// import Button from './Button';
+// import Button from './Button';
+
+import './Sidebar.css';
 
 class Sidebar extends Component {
   //static not implemented in full in ES6. So this syntax thanks to Babel!
@@ -16,11 +24,17 @@ class Sidebar extends Component {
   render () {
     const usersList = this.props.users;
     return <aside id="sidebar" className="sidebar">
-      <ul>
-        {usersList.map(user => (
-          <li key={user.id}>{user.name}</li>
-        ))}
-      </ul>
+      <div>
+        <ul>
+          {usersList.map(user => (
+            <li key={user.id}>{user.name}</li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <InitialiseButton />
+        <KeyOptions />
+      </div>
     </aside>
   };
 

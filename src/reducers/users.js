@@ -1,4 +1,4 @@
-import {ADD_USER, INITIATE_USER, USERS_LIST} from '../actions/ActionTypes'
+import {ADD_USER, USERS_LIST} from '../actions/ActionTypes'
 
 const users = (state = [], action) => {
   switch (action.type) {

@@ -1,4 +1,4 @@
-import {ADD_MESSAGE, MESSAGE_RECEIVED, ADD_USER, INITIATE_USER, CREATE_USER_FROM_KEYS, USERS_LIST}  from './ActionTypes';
+import {ADD_MESSAGE, MESSAGE_RECEIVED, ADD_USER, INITIALISE_USER, CREATE_USER_FROM_KEYS, USERS_LIST}  from './ActionTypes';
 
 let messageId = 0;
 let userId = 0;
@@ -16,11 +16,10 @@ const addUser = name => ({
   name
 });
 
-const initiateUser = name => ({
-  type: INITIATE_USER,
-  id: userId++,
-  name,
-  otherProperties : ''
+const initialiseUser = (storedLocalUser = {} , name) => ({
+  type: INITIALISE_USER,
+  storedLocalUser : storedLocalUser || {},                    /// Why is default assign in params not being picked up?
+  name
 });
 
 const messageReceived = (message, author) => ({
@@ -35,4 +34,4 @@ const populateUsersList = users => ({
   users
 });
 
-export {addMessage, addUser, initiateUser, messageReceived, populateUsersList}
+export {addMessage, addUser, initialiseUser, messageReceived, populateUsersList}

@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import './Message.css';
+
 class Message extends Component {
   //static not implemented in full in ES6. So this syntax thanks to Babel!
   static propTypes = {

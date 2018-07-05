@@ -1,5 +1,5 @@
 import Chance from 'chance';
-import { takeEvery, put } from 'redux-saga/effects';
+import { takeEvery, put, call } from 'redux-saga/effects';
 import { ADD_MESSAGE, ADD_USER, INITIALISE_USER, ATTACH_KEYS_TO_USER} from '../actions/ActionTypes';
 import { genKeys } from '../logic/key-helpers';
 // import { getUserById } from '../logic/user-helpers';
@@ -34,7 +34,7 @@ const initialiseUser = function* initialiseUser () {
     }
       else {
         let t0 = new Date();
-        keys =  genKeys (null, t0);
+        keys = yield call (genKeys, null, t0);
         // setTimeout ( ()=> {
         //   console.log(count +': after a wait, those keys look like ',keys);
         // }, 50);

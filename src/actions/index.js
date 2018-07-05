@@ -12,6 +12,8 @@ const addMessage = (message, author) => ({
   author
 });
 
+// ATTACH_KEYS_TO_USER has no Action Creator - consider the case for it later.
+
 const addUser = (name, options = {}) => ({
   type: ADD_USER,
   id: userId++,

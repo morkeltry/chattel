@@ -18,9 +18,9 @@ async function genKeys (seed) {
   };
 
   while (true) {
-    let jwtP = await jwt.signAsync('payload', 'secretOrPrivateKey');
-    keys.pub = genPubKey (keys.priv);  
-    console.log('After ? ms, will yield: ',keys);
+    await jwt.signAsync('payload', 'secretOrPrivateKey');
+    keys.pub = genPubKey (keys.priv);
+    console.log('After ? ms, will yield: ',keys.toString());
     return keys;
   }
 };

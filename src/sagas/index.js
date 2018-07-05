@@ -1,6 +1,6 @@
 import Chance from 'chance';
 import { takeEvery, put, call } from 'redux-saga/effects';
-import { ADD_MESSAGE, ADD_USER, INITIALISE_USER, ATTACH_KEYS_TO_USER} from '../actions/ActionTypes';
+import { ADD_MESSAGE, ADD_USER, INITIALISE_USER, ATTACH_KEYS_TO_USER, STORE_LOCAL_USER} from '../actions/ActionTypes';
 import { addUser } from '../actions/';
 import { genKeys } from '../logic/key-helpers';
 // import { getUserById } from '../logic/user-helpers';
@@ -17,12 +17,11 @@ const handleNewMessage = function* handleNewMessage (params) {
 
 
 const initialiseUser = function* initialiseUser () {
-  let keys ;
-  let count=0;
+  let keys;
 
   yield takeEvery (INITIALISE_USER, function* (action) {
     const storedLocalUser = Object.assign ({}, action.storedLocalUser);
-    console.log('action: ',action);
+
     console.log(action.name ? 'name: '+action.name : 'No name passed to action'+ action.storedLocalUser? 'action.storedLocalUser.name: '+action.storedLocalUser.name : 'AND action.storedLocalUser has no name');
     let name = action.name || (action.storedLocalUser && action.storedLocalUser.name) ? action.storedLocalUser.name : new Chance().first();
     console.log('name: ',name);
@@ -35,16 +34,16 @@ const initialiseUser = function* initialiseUser () {
     }
       else {
         keys = yield call (genKeys, null);
-        yield put ({ type: 'ATTACH_KEYS_TO_USER', keys});
+        yield put ({ type: ATTACH_KEYS_TO_USER, keys});
         // storedLocalUser.keys = keys;
       };
 
     // if the action came with a storedLocalUser, then put() the new storedLocalUser, (modified with new keys if necessary)
     // if not, then put() the earlier added user, which will already have keys attached.
     if (action.storedLocalUser)
-      yield put ({ type: 'STORE_LOCAL_USER', storedLocalUser })
+      yield put ({ type: STORE_LOCAL_USER, storedLocalUser })
     else
-      yield put ({ type: 'STORE_LOCAL_USER', id : {TODO: 'get the added user'} });
+      yield put ({ type: STORE_LOCAL_USER, id : {TODO: 'get the added user'} });
   });
 };
 

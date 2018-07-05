@@ -9,26 +9,22 @@ const users = (state = [], action) => {
 
     case ADD_USER:
       const { requiresKeys } = action;
-      console.log('ADD_USER: state on entry: ', state);
       return state.concat([{ name, id, keys, requiresKeys }])
 
     // action.keys to be attached to any user in state with flag requiresKeys==true. ( || to user with id if action.id set)
     case ATTACH_KEYS_TO_USER:
       // const { storedLocalUser } = action;
-      console.log('ATTACH_KEYS_TO_USER: state on entry: ', state);
       const newState = state.slice(0);
-
-      console.log('=> id & keys = ',id, keys );
-      console.log('newState (should be clone of state on entry) : ', newState);
       newState.forEach (user => {
         if (user.requiresKeys || user.id===id) {
           // if (keys) console.log('WARNIN: changing keys for user',id);
-          user.keys = keys    //  NB cloning using Object.assign had nasty effects - turned string to Array
+          user.keys = keys    //  NB cloning using Object.assign had nasty effects - turned string to Array-like object
+                              //  Should be fine once keys is reliably an object
           delete user.requiresKeys;
         }
       })
       return newState
-      
+
       //
       // // console.log('action= ',action,'storedLocalUser= ',storedLocalUser,'name= ',name);
       // if (storedLocalUser) {

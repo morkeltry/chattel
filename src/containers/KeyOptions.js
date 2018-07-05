@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import KeyOptionsComponent from '../components/KeyOptions';
 import {  } from '../actions';
 
-const mapStateToProps = state => ({name: state.name, keys: state.keys});
+const mapStateToProps = state => {
+  let ownUser = state.users[0];
+  return ownUser? {name: ownUser.name, keys: ownUser.keys} : {}
+}
 
 const mapDispatchToProps = dispatch => ({
   dispatch: (storedLocalUser) => {

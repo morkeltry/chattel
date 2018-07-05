@@ -18,7 +18,7 @@ class KeyOptions extends Component {
 
 
   render () {
-    console.log(this.props);
+    console.log('KeyOptions props:', this.props);
     return true ?
       <div className = "keys-options">
         KEYS:

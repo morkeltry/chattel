@@ -7,7 +7,7 @@ const genPubKey = (privKey)=> {
 };
 
 
-async function genKeys (seed, timer) {
+async function genKeys (seed) {
   const keys= {
     priv : 'supersecret...sssh!'
   };
@@ -19,8 +19,9 @@ async function genKeys (seed, timer) {
 
   while (true) {
     let jwtP = await jwt.signAsync('payload', 'secretOrPrivateKey');
-    console.log('After ',new Date()-timer,'ms, will yield: ',jwtP);
-    return jwtP;
+    keys.pub = genPubKey (keys.priv);  
+    console.log('After ? ms, will yield: ',keys);
+    return keys;
   }
 };
 

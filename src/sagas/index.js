@@ -1,12 +1,12 @@
 import Chance from 'chance';
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { ADD_MESSAGE, ADD_USER, INITIALISE_USER, ATTACH_KEYS_TO_USER} from '../actions/ActionTypes';
+import { addUser } from '../actions/';
 import { genKeys } from '../logic/key-helpers';
 // import { getUserById } from '../logic/user-helpers';
 
 const existsLocal = () => false;
 const retrieveLocal = ()=> {};
-
 
 const handleNewMessage = function* handleNewMessage (params) {
   yield takeEvery (ADD_MESSAGE, (action) => {
@@ -28,18 +28,15 @@ const initialiseUser = function* initialiseUser () {
     console.log('name: ',name);
 
 
-    yield put ({ type: 'ADD_USER', name , requiresKeys: true});
+    // first create and put an ADD_USER action
+    yield put ( addUser (name, {requiresKeys: true}) );
     if (action.storedLocalUser && action.storedLocalUser.keys) {
       console.log('got keys already. No waiting on a Generator for me');
     }
       else {
-        let t0 = new Date();
-        keys = yield call (genKeys, null, t0);
-        // setTimeout ( ()=> {
-        //   console.log(count +': after a wait, those keys look like ',keys);
-        // }, 50);
-        yield put ({ type: 'ATTACH_KEYS_TO_USER', keys});     // (THE NEXT) TODO: this is put-ting the Promise of keys before keys resolves.
-        storedLocalUser.keys = storedLocalUser;     // HUH?
+        keys = yield call (genKeys, null);
+        yield put ({ type: 'ATTACH_KEYS_TO_USER', keys});
+        // storedLocalUser.keys = keys;
       };
 
     // if the action came with a storedLocalUser, then put() the new storedLocalUser, (modified with new keys if necessary)

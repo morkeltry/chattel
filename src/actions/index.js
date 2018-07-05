@@ -3,6 +3,8 @@ import {ADD_MESSAGE, MESSAGE_RECEIVED, ADD_USER, INITIALISE_USER, ATTACH_KEYS_TO
 let messageId = 0;
 let userId = 0;
 
+//Action creators :)
+
 const addMessage = (message, author) => ({
   type: ADD_MESSAGE,
   id: messageId++,
@@ -10,10 +12,12 @@ const addMessage = (message, author) => ({
   author
 });
 
-const addUser = name => ({
+const addUser = (name, options = {}) => ({
   type: ADD_USER,
   id: userId++,
-  name
+  name,
+  keys : options.keys,
+  requiresKeys : options.requiresKeys
 });
 
 const initialiseUser = (storedLocalUser = {} , name) => ({

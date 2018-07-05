@@ -1,14 +1,14 @@
 import {ADD_USER, ATTACH_KEYS_TO_USER, USERS_LIST} from '../actions/ActionTypes'
 
-const users = (state = [], action) => {   //Why do parameters become Promises if this is convered to async function ???
+const users = (state = [], action) => {
   const { id, keys } = action;                 //Annoying compile rules won't let declaration exist in two mutually-exclusive case blocks.
   let { name } = action;
 
+  console.log('Got ','action',action);
   switch (action.type) {
 
     case ADD_USER:
       const { requiresKeys } = action;
-      console.log('Got ',action);
       console.log('ADD_USER: state on entry: ', state);
       return state.concat([{ name, id, keys, requiresKeys }])
 
@@ -18,16 +18,17 @@ const users = (state = [], action) => {   //Why do parameters become Promises if
       console.log('ATTACH_KEYS_TO_USER: state on entry: ', state);
       const newState = state.slice(0);
 
-      console.log('Got ',action);
-      console.log('newState (should be clone) : ', newState);
+      console.log('=> id & keys = ',id, keys );
+      console.log('newState (should be clone of state on entry) : ', newState);
       newState.forEach (user => {
         if (user.requiresKeys || user.id===id) {
           // if (keys) console.log('WARNIN: changing keys for user',id);
-          user.keys = Object.assign ({}, keys);
+          user.keys = keys    //  NB cloning using Object.assign had nasty effects - turned string to Array
           delete user.requiresKeys;
         }
       })
       return newState
+      
       //
       // // console.log('action= ',action,'storedLocalUser= ',storedLocalUser,'name= ',name);
       // if (storedLocalUser) {

@@ -8,7 +8,7 @@ const userFromKeys = (state = [], action) => {
   switch (action.type) {
     case ATTACH_KEYS_TO_USER: {
       let { index, user } = getUserById (state, action.id);
-      user = Object.assign ({},user);                    //gotta be pure, yo~
+      user = Object.assign ({},user);                    //gotta be pure, yo NB- will this mess about with strings & arrays?
       const { name, keys } = user;
       const oldKeys = keys;
       const newKeys = action.keys;

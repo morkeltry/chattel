@@ -19,9 +19,8 @@ class InitialiseButton extends Component {
   fireInitialise (dispatch) {
     console.log( ('__________________'));
     console.log( ('Clicked initialise'));
-    // console.log('will dispatch using: ',dispatch);
     const storedLocalUser = localStorage.getItem('localUser');
-    console.log('storedLocalUser:',storedLocalUser);
+    // console.log('storedLocalUser:',storedLocalUser);
     dispatch (storedLocalUser);
   }
 

@@ -24,6 +24,8 @@
   },
   "devDependencies": {
     "concurrently": "^3.5.0",
+    "jsonwebtoken": "^8.3.0",
+    "jsonwebtoken-promisified": "^1.0.3",
     "nodemon": "^1.17.5"
   },
   "proxy": "http://localhost:8989"

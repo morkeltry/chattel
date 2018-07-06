@@ -1,7 +1,9 @@
-import {ADD_MESSAGE, MESSAGE_RECEIVED, ADD_USER, INITIATE_USER, USERS_LIST}  from './ActionTypes';
+import {ADD_MESSAGE, MESSAGE_RECEIVED, ADD_USER, INITIALISE_USER, ATTACH_KEYS_TO_USER, USERS_LIST}  from './ActionTypes';
 
 let messageId = 0;
 let userId = 0;
+
+//Action creators :)
 
 const addMessage = (message, author) => ({
   type: ADD_MESSAGE,
@@ -10,17 +12,20 @@ const addMessage = (message, author) => ({
   author
 });
 
-const addUser = name => ({
+// ATTACH_KEYS_TO_USER has no Action Creator - consider the case for it later.
+
+const addUser = (name, options = {}) => ({
   type: ADD_USER,
   id: userId++,
-  name
+  name,
+  keys : options.keys,
+  requiresKeys : options.requiresKeys
 });
 
-const initiateUser = name => ({
-  type: INITIATE_USER,
-  id: userId++,
-  name,
-  otherProperties : ''
+const initialiseUser = (storedLocalUser = {} , name) => ({
+  type: INITIALISE_USER,
+  storedLocalUser : storedLocalUser || {},                    /// Why is default assign in params not being picked up?
+  name
 });
 
 const messageReceived = (message, author) => ({
@@ -35,4 +40,4 @@ const populateUsersList = users => ({
   users
 });
 
-export {addMessage, addUser, initiateUser, messageReceived, populateUsersList}
+export {addMessage, addUser, initialiseUser, messageReceived, populateUsersList}

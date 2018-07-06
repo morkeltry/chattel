@@ -1,4 +1,4 @@
-import {ADD_MESSAGE, MESSAGE_RECEIVED, ADD_USER, INITIATE_USER, USERS_LIST}  from '../actions/ActionTypes';
+import {ADD_MESSAGE, MESSAGE_RECEIVED, ADD_USER, INITIALISE_USER, USERS_LIST}  from '../actions/ActionTypes';
 import {addMessage, addUser, messageReceived, populateUsersList} from '../actions';
 
 const setupSocket = (dispatch, localUser, url) => {
@@ -7,7 +7,7 @@ const setupSocket = (dispatch, localUser, url) => {
   socket.onopen = () => {
     console.log('We have connection');
     socket.send(JSON.stringify({
-      type: INITIATE_USER,
+      type: INITIALISE_USER,
       name: localUser.username
     }))
   };

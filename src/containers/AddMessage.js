@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import AddMessageComponent from '../components/AddMessage';
 import {addMessage} from '../actions';
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({localUserName: state.users[0]? state.users[0].name : null});
 
 const mapDispatchToProps = dispatch => ({
   dispatch: (message, author) => {
@@ -10,7 +10,7 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export const AddMessage = connect(
+export const AddMessage = connect (
     mapStateToProps,
     mapDispatchToProps
   ) (AddMessageComponent)
